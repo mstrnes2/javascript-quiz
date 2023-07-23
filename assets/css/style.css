@@ -1,0 +1,41 @@
+body{
+    padding: 100px;
+    background-color: rgb(57, 138, 236);
+    text-align: center;
+}
+
+.quiz-box{
+    padding: 50px;
+    border-color: white;
+    background-color: white;
+    margin-top: 200px;
+    box-shadow: 10px 10px rgb(44, 43, 43);
+}
+
+#coding-quiz{
+    font-weight: bolder;
+
+}
+
+.instructions{
+    font-size: larger;
+}
+
+#goodluck{
+    font-size: large;
+    font-weight: bold;
+}
+
+button{
+    background-color: blue;
+    color: white;
+    font-size: 16px;
+    padding: 10px;
+}
+
+button:hover{
+    color: white;
+    box-shadow: 10px 10px 5px black;
+    cursor: pointer;
+    background-color: rgb(97, 97, 233)
+}
