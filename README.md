@@ -9,3 +9,5 @@ How do you write "Hello World" in an alert box?
 How do you create a function in JavaScript?
 
 What is the correct way to write a JavaScript array?
+
+https://www.includehelp.com/mcq/javascript-multiple-choice-questions-mcqs.aspx
