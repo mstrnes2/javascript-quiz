@@ -9,7 +9,7 @@
 
 <body>
     
-    <div class="quiz-box">
+    <div id="quiz-box">
         <div id="start">
             <h1 class="coding-quiz">Coding Quiz!</h1>
             <p class="instructions">This quiz will test your knowledge of JavaScript. You will recieve 5 multiple choice questions and answer them within one minute. For every question you get wrong 15 seconds will be
@@ -19,7 +19,7 @@
         </div>
 
         <div id="quiz-questions">
-            <div id="timer">Time: <span id = "time"></span></div>
+            <div id= "timer" class="hide">Time: <span id = "time"></span></div>
             <div id="questions"></div>
             <div id="choice">
                 
@@ -34,6 +34,13 @@
         </div>
         </div>
     
+    </div>
+
+    <div id="saved-high-scores" class = "hide">
+        <h2 id="title">High Scores</h2>
+        <ol id="high-score-list"></ol>
+        <button id="try-again">Try Again</button>
+        <button id="clear-scores">Clear High Scores</button>
     </div>
 
 

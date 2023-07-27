@@ -4,7 +4,7 @@ body{
     text-align: center;
 }
 
-.quiz-box{
+#quiz-box{
     padding: 50px;
     border-color: white;
     background-color: white;

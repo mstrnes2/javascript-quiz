@@ -9,7 +9,12 @@ var pickD = document.getElementById("D");
 var answerEl = document.getElementById("choice");
 var timeEl = document.getElementById("time");
 var highScoreEl = document.getElementById("high-score");
+var timerEl = document.getElementById("timer");
+var saveScores = document.getElementById("save");
+var theQuiz = document.getElementById("quiz-box");
+var savedHighScores = document.getElementById("saved-high-scores");
 var timerInterval;
+
 
 var questions = [
     {
@@ -22,36 +27,29 @@ var questions = [
         choices : ["getElementById()", "getElement(id)", "getElementById(id)","elementById(id)",],
         correct : "getElementById(id)",
     },
-    // {
-    //     question : " Which JavaScript method is used to write on browser's console?", 
-    //     choiceA : "console.log()", 
-    //     choiceB : "console.write()",
-    //     choiceC : "console.output()",
-    //     choiceD : "console.writeHTML()",
-    //     correct : "A",
-    // },
-    // {
-    //     question : "Which is the correct JavaScript statement to display 'Hello World!' into an alert box?", 
-    //     choiceA : "alert(){'Hello World'}",
-    //     choiceB : "alert(console.log('Hello World!'));",
-    //     choiceC : "alert(Text:'Hello World!');",
-    //     choiceD : "alert('Hello World!');",
-    //     correct : "D",
-    // },
-    // {
-    //     question : "In JavaScript, single line comment begins with ___.", 
-    //     choiceA : "#", 
-    //     choiceB : "//",
-    //     choiceC : "$",
-    //     choiceD : "/*",
-    //     correct : "B",
-    // }
+    {
+        question : " Which JavaScript method is used to write on browser's console?", 
+        choices : ["console.log()","console.write()","console.output()","console.writeHTML()"],
+        correct : "console.log()",
+    },
+    {
+        question : "Which is the correct JavaScript statement to display 'Hello World!' into an alert box?", 
+        choices : ["alert(){'Hello World'}","alert(console.log('Hello World!'));","alert(Text:'Hello World!');","alert('Hello World!');"],
+        correct : "alert('Hello World!');",
+    },
+    {
+        question : "In JavaScript, single line comment begins with ___.", 
+        choices : ["#","//","$","/*"],
+        correct : "//",
+    }
 ];
 
 var finalQuestion = questions.length;
 var currentQuestion = 0;
 var time = 60;
 var score = 0;
+
+
 
 function getQuizQuestions(){
     if(currentQuestion === finalQuestion){
@@ -92,6 +90,7 @@ function correctAnswer(event){
 function startQuiz(){
     startButton.style.display = "none";
     homePage.style.display = "none";
+    timerEl.classList.remove("hide");
     timeEl.textContent = time;
     timerInterval = setInterval(countdown, 1000);
     getQuizQuestions();
@@ -123,3 +122,32 @@ function saveScore(){
 };
 
 startButton.addEventListener("click",startQuiz);
+
+function showScores(){
+    theQuiz.style.display = "none";
+    savedHighScores.classList.remove("hide");
+    const highScoresArray = JSON.parse(localStorage.getItem("high-scores"));
+    console.log(highScoresArray);
+    for (let index = 0; index < highScoresArray.length; index++) {
+        const highScoreEl = document.createElement("li");
+        highScoreEl.textContent = highScoresArray[index].name + " " + highScoresArray[index].score;
+        document.getElementById("high-score-list").append(highScoreEl);
+    }
+}
+
+
+saveScores.addEventListener("click",showScores);
+
+// function clearScores(){
+//     window.localStorage.clear();
+// }
+
+// document.getElementById("clear-scores").addEventListener("click", clearScores);
+
+function tryAgain(){
+    savedHighScores.style.display = "none";
+    theQuiz.classList.remove("hide");
+    startQuiz();
+}
+
+document.getElementById("try-again").addEventListener("click", tryAgain);
