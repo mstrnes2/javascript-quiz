@@ -128,7 +128,7 @@ function showScores(){
     savedHighScores.classList.remove("hide");
     const highScoresArray = JSON.parse(localStorage.getItem("high-scores"));
     console.log(highScoresArray);
-    for (let index = 0; index < highScoresArray.length; index++) {
+    for (let index = 0; index <= highScoresArray.length; index++) {
         const highScoreEl = document.createElement("li");
         highScoreEl.textContent = highScoresArray[index].name + " " + highScoresArray[index].score;
         document.getElementById("high-score-list").append(highScoreEl);
@@ -138,15 +138,20 @@ function showScores(){
 
 saveScores.addEventListener("click",showScores);
 
-// function clearScores(){
-//     window.localStorage.clear();
-// }
+function clearScores(){
+    highScoreEl = "";
+    localStorage.clear();
+ }
 
-// document.getElementById("clear-scores").addEventListener("click", clearScores);
+ document.getElementById("clear-scores").addEventListener("click", clearScores);
 
 function tryAgain(){
     savedHighScores.style.display = "none";
-    theQuiz.classList.remove("hide");
+    // theQuiz.classList.remove("hide");
+    // quizEl.classList.remove("hide");
+    // time = 60;
+    // score = 0;
+    // currentQuestion = 0;
     startQuiz();
 }
 
