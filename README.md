@@ -18,16 +18,6 @@ Application link: https://mstrnes2.github.io/javascript-quiz/
 This website can be used to test your knowledge of javascript. Use this to take a quiz on the fundementals of javascript and save your high scores.
 
 
-```md
-![alt text](assets/images/Screenshot%20(2).png)
-```
-```md
-![alt text](assets/images/Screenshot%20(3).png)
-```
-```md
-![alt text](assets/images/Screenshot%20(4).png)
-```
-
 ## Credits
 
 https://www.w3docs.com
