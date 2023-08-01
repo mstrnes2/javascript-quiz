@@ -2,10 +2,6 @@ var startButton = document.getElementById("start-button");
 var homePage = document.getElementById("start");
 var quizQuestions = document.getElementById("questions");
 var quizEl = document.getElementById("quiz-questions");
-var pickA = document.getElementById("A");
-var pickB = document.getElementById("B");
-var pickC = document.getElementById("C");
-var pickD = document.getElementById("D");
 var answerEl = document.getElementById("choice");
 var timeEl = document.getElementById("time");
 var highScoreEl = document.getElementById("high-score");
@@ -25,7 +21,7 @@ var questions = [
     {
         question : "Which JavaScript method is used to access an HTML element by id?", 
         choices : ["getElementById()", "getElement(id)", "getElementById(id)","elementById(id)",],
-        correct : "getElementById(id)",
+        correct : "getElementById()",
     },
     {
         question : " Which JavaScript method is used to write on browser's console?", 
@@ -47,7 +43,6 @@ var questions = [
 var finalQuestion = questions.length;
 var currentQuestion = 0;
 var time = 60;
-var score = 0;
 
 
 
@@ -55,6 +50,7 @@ function getQuizQuestions(){
     if(currentQuestion === finalQuestion){
         return finalScore();
     }
+
 
     var questionType = questions[currentQuestion];
     quizQuestions.textContent = questionType.question;
@@ -74,6 +70,8 @@ function correctAnswer(event){
         time = time - 15;
         timeEl.textContent = time;
         if(time <= 0){
+            time = 0;
+            timeEl.textContent = 0;
             finalScore();
         }
     }
@@ -88,11 +86,14 @@ function correctAnswer(event){
 
 
 function startQuiz(){
-    startButton.style.display = "none";
-    homePage.style.display = "none";
+    homePage.classList.add("hide");
     timerEl.classList.remove("hide");
+    savedHighScores.classList.add("hide");
+    time = 60;
+    currentQuestion = 0;
     timeEl.textContent = time;
     timerInterval = setInterval(countdown, 1000);
+    quizEl.classList.remove("hide");
     getQuizQuestions();
 };
 
@@ -107,7 +108,7 @@ function countdown(){
 
 function finalScore(){
     clearInterval(timerInterval);
-    quizEl.style.display = "none";
+    quizEl.classList.add("hide");
     highScoreEl.classList.remove("hide");
     document.getElementById("save").onclick = saveScore;
     document.getElementById("final-score").textContent = time;
@@ -119,16 +120,18 @@ function saveScore(){
     var newScore = {score:time, name:name}
     highScoresArray.push(newScore);
     localStorage.setItem("high-scores", JSON.stringify(highScoresArray));
+    savedHighScores.classList.remove("hide");
+    highScoreEl.classList.add("hide");
+    showScores();
 };
 
 startButton.addEventListener("click",startQuiz);
 
 function showScores(){
-    theQuiz.style.display = "none";
-    savedHighScores.classList.remove("hide");
-    const highScoresArray = JSON.parse(localStorage.getItem("high-scores"));
+    document.querySelector("ol").innerHTML = "";
+    const highScoresArray = JSON.parse(localStorage.getItem("high-scores")) || [];
     console.log(highScoresArray);
-    for (let index = 0; index <= highScoresArray.length; index++) {
+    for (let index = 0; index < highScoresArray.length; index++) {
         const highScoreEl = document.createElement("li");
         highScoreEl.textContent = highScoresArray[index].name + " " + highScoresArray[index].score;
         document.getElementById("high-score-list").append(highScoreEl);
@@ -136,23 +139,12 @@ function showScores(){
 }
 
 
-saveScores.addEventListener("click",showScores);
-
 function clearScores(){
-    highScoreEl = "";
-    localStorage.clear();
- }
+    window.localStorage.clear();
+    document.querySelector("ol").innerHTML = "";
+}
 
  document.getElementById("clear-scores").addEventListener("click", clearScores);
 
-function tryAgain(){
-    savedHighScores.style.display = "none";
-    // theQuiz.classList.remove("hide");
-    // quizEl.classList.remove("hide");
-    // time = 60;
-    // score = 0;
-    // currentQuestion = 0;
-    startQuiz();
-}
 
-document.getElementById("try-again").addEventListener("click", tryAgain);
+document.getElementById("try-again").addEventListener("click", startQuiz);
