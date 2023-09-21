@@ -8,7 +8,7 @@ In this project I am building a quiz for javascript. It is a 60 second quiz and 
 
 Screenshot of application:
 md
-![alt text](assets/images/Screenshot%20(13).png)
+![screenshot of application](assets/images/Screenshot%20(13).png)
 
 
 Application link: https://mstrnes2.github.io/javascript-quiz/
